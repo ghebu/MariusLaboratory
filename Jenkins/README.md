@@ -13,3 +13,7 @@ docker-compose -up -d
 ```
 docker-compose build --no-cache
 ```
+
+
+### Features 
+1. Installing the necessary plugins on build by editing the [plugins.txt file](JenkinsDockerfile/Jenkins.Dockerfile)
