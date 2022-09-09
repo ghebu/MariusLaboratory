@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 if [ $# -eq 0 ]; then
   echo "USAGE: $0 plugin1 plugin2 ..."

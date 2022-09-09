@@ -1,7 +1,9 @@
 version: "3"
 services:
   jenkins: 
-    #image: jenkins/jenkins:2.361.1-lts
+    environment: 
+      ADMIN_USERNAME: "ghebu"
+      ADMIN_PASSWORD: "passw0rd"
     build: 
       context: JenkinsDockerfile
       dockerfile: Jenkins.Dockerfile

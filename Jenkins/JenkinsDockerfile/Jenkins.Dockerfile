@@ -13,3 +13,5 @@ USER 1000
 COPY plugins.txt /tmp/plugins.txt
 RUN pluginsList=$(cat /tmp/plugins.txt | grep -vi '^#') && \
     install-plugins.sh $pluginsList
+RUN mkdir -p $JENKINS_HOME/init.groovy.d
+COPY groovy/*.groovy $JENKINS_HOME/init.groovy.d/
