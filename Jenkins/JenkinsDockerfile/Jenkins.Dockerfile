@@ -11,5 +11,5 @@ RUN chown 1000 /usr/local/bin/install-plugins.sh && \
 ##Switching to Jenkins user
 USER 1000
 COPY plugins.txt /tmp/plugins.txt
-RUN pluginsList=$(cat /tmp/plugins.txt) && \
+RUN pluginsList=$(cat /tmp/plugins.txt | grep -vi '^#') && \
     install-plugins.sh $pluginsList

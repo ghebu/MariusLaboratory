@@ -11,13 +11,8 @@ services:
     ports:
       - 8080:8080
     privileged: true
-    # deploy:
-    #   limits:
-    #     cpu: "2"
-    #     memory: "3Gi"
-    #   reservation: 
-    #     cpu: '0.25'
-    #     memory: '512M'
+
 
 volumes: 
   jenkins_home:
+

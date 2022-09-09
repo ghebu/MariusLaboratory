@@ -16,4 +16,4 @@ docker-compose build --no-cache
 
 
 ### Features 
-1. Installing the necessary plugins on [Docker build](JenkinsDockerfile/Jenkins.Dockerfile) by editing the [plugins.txt file](JenkinsDockerfile/plugins.txt). 
+1. Installing custom Jenkins plugins on [Docker build](JenkinsDockerfile/Jenkins.Dockerfile) by editing the [plugins.txt file](JenkinsDockerfile/plugins.txt). 
