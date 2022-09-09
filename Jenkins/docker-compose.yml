@@ -1,0 +1,23 @@
+version: "3"
+services:
+  jenkins: 
+    #image: jenkins/jenkins:2.361.1-lts
+    build: 
+      context: JenkinsDockerfile
+      dockerfile: Jenkins.Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - jenkins_home:/var/jenkins_home:Z
+    ports:
+      - 8080:8080
+    privileged: true
+    # deploy:
+    #   limits:
+    #     cpu: "2"
+    #     memory: "3Gi"
+    #   reservation: 
+    #     cpu: '0.25'
+    #     memory: '512M'
+
+volumes: 
+  jenkins_home:
