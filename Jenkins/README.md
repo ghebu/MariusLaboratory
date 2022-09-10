@@ -24,4 +24,4 @@ docker-compose build --no-cache
 
 
 ### TODO
-[] Script auto approvals for seed job
+[ ] Script auto approvals for seed job
