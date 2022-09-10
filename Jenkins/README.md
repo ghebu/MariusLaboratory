@@ -20,3 +20,8 @@ docker-compose build --no-cache
     - Passwords can be set from the [Jenkins.Dockerfile](JenkinsDockerfile/Jenkins.Dockerfile) and/or from [docker-compose.yml](docker-compose.yml)
 
 2. Adding configuration as service plugin & [config file](JenkinsDockerfile/scripts/casc-jenkins.yml). [Docs](https://plugins.jenkins.io/configuration-as-code/#plugin-content-getting-started)
+
+
+
+###TODO
+[] Script auto approvals for seed job
