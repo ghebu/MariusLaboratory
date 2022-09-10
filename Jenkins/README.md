@@ -5,13 +5,16 @@ Installing a customised Jenkins for sandbox purposes.
 
 ### Deploy
 ```
+docker-compose build --no-cache
 docker-compose -up -d 
 ```
 
-*However if changes are added to the JenkinsDockerfile/Jenkins.Dockerfile file then the command below needs to be ran before:*
-
+### Fresh deploy 
 ```
+docker-compose down 
+docker volume rm jenkins_jenkins_home
 docker-compose build --no-cache
+docker-compose up -d 
 ```
 
 
