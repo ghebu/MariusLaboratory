@@ -7,7 +7,7 @@ jobs:
   - script: >
       freeStyleJob('SEED-JOB') {
           scm {
-              github('ghebu/MariusLaboratory', 'master')
+              github('ghebu/MariusLaboratory', 'main')
           }
           
           steps {
