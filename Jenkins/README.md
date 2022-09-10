@@ -28,4 +28,4 @@ docker-compose up -d
 
 ### TODO
 - [ ] Script auto approvals for seed job
-- [ ] As an alternative solution to casc, create groovy script to create the seed job
+- [ ] As an alternative solution to CasC, create groovy script to create the seed job
