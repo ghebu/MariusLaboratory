@@ -21,6 +21,7 @@ installPlugin() {
     return 0
   else
     echo "Installing: $1"
+    sleep 0.5 ##To avoid random error code 16 /throttling.
     curl -L --silent --output ${plugin_dir}/${1}.hpi  https://updates.jenkins-ci.org/latest/${1}.hpi
     return 0
   fi

@@ -88,3 +88,4 @@ ws-cleanup
 
 ##Aditional plugins installed
 job-dsl
+configuration-as-code

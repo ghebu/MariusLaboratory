@@ -1,0 +1,22 @@
+## Example and demos: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos
+## Official Doc: https://plugins.jenkins.io/configuration-as-code/#plugin-content-getting-started
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+#Docs for DSL job using casc: https://github.com/jenkinsci/job-dsl-plugin/wiki/JCasC
+jobs:
+  - script: >
+      freeStyleJob('SEED-JOB') {
+          scm {
+              github('ghebu/MariusLaboratory', 'master')
+          }
+          
+          steps {
+            dsl {
+              external('Jenkins/JenkinsDockerfile/DSL/*.groovy')
+              ignoreExisting(true)
+              lookupStrategy("JENKINS_ROOT")
+              removeViewAction("DELETE")
+              removeAction("DELETE")
+            }
+          }
+      }
