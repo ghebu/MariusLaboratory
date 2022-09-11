@@ -26,11 +26,16 @@ docker-compose up -d
 
 
 
-### TODO
+### Issues/TODO
+<details>
+  <summary>Issues - Click me</summary>
 - [X] Script auto approvals for seed job
-- [ ] As an alternative solution to CasC, create groovy script to create the seed job
+- [X] As an alternative solution to CasC, create groovy script to create the seed job
+</details>
+- [ ] Shell script to install plugins gets throttled and fails sometimes.
 
-
-### References
+### Miscellaneous
 - Ways of creating a jenkins job programmatically:
     - [Stack overflow](https://stackoverflow.com/questions/16963309/how-create-and-configure-a-new-jenkins-job-using-groovy)
+    - [DSL Gradle examples](https://github.com/sheehan/job-dsl-gradle-example)
+
