@@ -29,8 +29,10 @@ docker-compose up -d
 ### Issues/TODO
 <details>
   <summary>Issues - Click me</summary>
+
 - [X] Script auto approvals for seed job
 - [X] As an alternative solution to CasC, create groovy script to create the seed job
+
 </details>
 - [ ] Shell script to install plugins gets throttled and fails sometimes.
 
