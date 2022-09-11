@@ -30,7 +30,7 @@ docker-compose up -d
 <details>
   <summary>Issues - Click me</summary>
 
-- [X] Script auto approvals for seed job
+- [X] Script auto approvals for seed job. Resolution Global security toggle in groovy script to approve DSL jobs
 - [X] As an alternative solution to CasC, create groovy script to create the seed job
 - [X] Shell script to install plugins gets throttled and fails sometimes on image build. Resolution: Using latest script provided by Jenkins (/bin/jenkins-plugins-cli)
 
