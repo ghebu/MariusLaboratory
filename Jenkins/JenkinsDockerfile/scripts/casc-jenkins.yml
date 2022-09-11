@@ -5,8 +5,7 @@ jenkins:
 #Docs for DSL job using casc: https://github.com/jenkinsci/job-dsl-plugin/wiki/JCasC
 jobs:
   - script: >
-      folders('SEED-JOBS')
-      freeStyleJob('SEED-JOBS/SEED-JOB-CasC') {
+      freeStyleJob('SEED-JOB-CasC') {
           scm {
               github('ghebu/MariusLaboratory', 'main')
           }
