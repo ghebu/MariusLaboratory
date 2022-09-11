@@ -9,7 +9,6 @@ jobs:
           scm {
               github('ghebu/MariusLaboratory', 'main')
           }
-          
           steps {
             dsl {
               external('Jenkins/JenkinsDockerfile/DSL/*.groovy')

@@ -32,9 +32,10 @@ docker-compose up -d
 
 - [X] Script auto approvals for seed job
 - [X] As an alternative solution to CasC, create groovy script to create the seed job
+- [X] Shell script to install plugins gets throttled and fails sometimes on image build. Resolution: Using latest script provided by Jenkins (/bin/jenkins-plugins-cli)
 
 </details>
-- [ ] Shell script to install plugins gets throttled and fails sometimes on image build.
+
 
 ### Miscellaneous
 - Ways of creating a jenkins job programmatically:
