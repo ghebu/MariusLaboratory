@@ -21,9 +21,10 @@ Sandbox testing different tools and practices from the DevOps world.
 │   │   │   └── 02-seed.groovy
 │   │   └── scripts
 │   │       ├── casc-jenkins.yml
-│   │       ├── install-plugins.sh
 │   │       └── plugins.txt
 │   ├── README.md
 │   └── docker-compose.yml
 └── README.md
+
+5 directories, 9 files
 ```
