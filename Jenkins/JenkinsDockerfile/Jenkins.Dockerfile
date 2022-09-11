@@ -1,10 +1,10 @@
 FROM jenkins/jenkins:2.361.1-lts
 
 ENV CASC_JENKINS_CONFIG=$JENKINS_HOME/casc_configs/
-## Installing packages as root
+## Switching to root user
 USER 0 
 
-## Updating the packages
+## Updating and installing the packages as root user
 RUN apt update -y && apt install vim curl telnet -y
 
 ## Copy utilitarians
