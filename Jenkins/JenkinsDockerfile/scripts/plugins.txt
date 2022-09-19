@@ -106,3 +106,4 @@ subversion:2.16.0
 
 job-dsl:1.81
 configuration-as-code:1512.vb_79d418d5fc8
+build-failure-analyzer:2.3.0
