@@ -14,7 +14,17 @@ services:
       - 8080:8080
     privileged: true
 
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ghebu
+      MONGO_INITDB_ROOT_PASSWORD: passw0rd
+    volumes:
+      - mongo_db:/data/db 
+    ports:
+      - 2717:27017
+    
 
 volumes: 
   jenkins_home:
-
+  mongo_db:
