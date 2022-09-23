@@ -60,6 +60,10 @@ for (KnowledgeBase.KnowledgeBaseDescriptor descriptor : descriptors) {
     } else if (descriptor instanceof MongoDBKnowledgeBase.MongoDBKnowledgeBaseDescriptor) {
         foundMongoDB = true;
         mongoDescriptor = descriptor;
+        
+        testConnection = descriptor.doTestConnection(host, port, dbName, userName, password,false,true);
+        println(testConnection)  //Should return --> OK: Connection OK!
+
     } 
 }
 
