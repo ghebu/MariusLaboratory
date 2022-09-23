@@ -62,37 +62,43 @@ for (KnowledgeBase.KnowledgeBaseDescriptor descriptor : descriptors) {
         mongoDescriptor = descriptor;
         
         testConnection = descriptor.doTestConnection(host, port, dbName, userName, password,false,true);
-        println(testConnection)  //Should return --> OK: Connection OK!
+        //println(testConnection)  //Should return --> OK: Connection OK!
+        mongoConnected = testConnection ==~ /OK: Connection OK!/ //returns boolean value if the connectin to the Mongo DB is successful or not.
+        println("Is the connection to Mongo DB successful?: " + mongoConnected)
 
     } 
 }
 
-if (isMongoConfigured && !updateMongoConfiguration) {
+if (isMongoConfigured && !updateMongoConfiguration && mongoConnected) {
 	mongoKdb = true;
     println("MongoDB is already configured and it will not be updated.");
-} else if (isMongoConfigured && updateMongoConfiguration){ 
+} else if (updateMongoConfiguration && mongoConnected){ 
     MongoDBKnowledgeBase mongoKB = new MongoDBKnowledgeBase(host, port, dbName, userName, Secret.fromString("passw0rd"), true, true);
     instance.setKnowledgeBase(mongoKB);
     instance.save();
     println("MongoDB was configured as " + kdb);
-} 
+} else { 
+    println("Cannot update the knowledge base. Mongo is not configured and there is no connection to the specified MongoDB")
+}
 
 
 
 
 
+if(isMongoConfigured && mongoConnected) {
+    //Defining Cause
+    def causeName = "IsADirectory"
+    def causeDescription = "Checking if the file is a directory or not"
+    def causeComment = "You are trying to read a directory instead of a file"
+    def causeCategory = "BASH"
+    def causeLogFilter = "cat: .*: Is a directory"
 
-//Defining Cause
-def causeName = "IsADirectory"
-def causeDescription = "Checking if the file is a directory or not"
-def causeComment = "You are trying to read a directory instead of a file"
-def causeCategory = "BASH"
-def causeLogFilter = "cat: .*: Is a directory"
+    //FailureCause(String name, String description, String comment, String categories)
 
-//FailureCause(String name, String description, String comment, String categories)
-
-FailureCause cause = new FailureCause(causeName, causeDescription, causeComment, causeCategory );
-cause.addIndication(new BuildLogIndication(causeLogFilter));
-cause = kdb.addCause(cause);
+    FailureCause cause = new FailureCause(causeName, causeDescription, causeComment, causeCategory );
+    cause.addIndication(new BuildLogIndication(causeLogFilter));
+    cause = kdb.addCause(cause);
+    println("A new Failure Cause created")
+}
 
 
