@@ -27,6 +27,8 @@ def dbName = "jenkins";
 def userName = null ?: "ghebu";
 def password = null ?: "passw0rd";
 def port = 27017;
+boolean enableStatistics = false;
+boolean successfulLogging = true;
 
 boolean updateMongoConfiguration = true;
 boolean foundLocalFile = false;
@@ -73,7 +75,8 @@ if (isMongoConfigured && !updateMongoConfiguration && mongoConnected) {
 	mongoKdb = true;
     println("MongoDB is already configured and it will not be updated.");
 } else if (updateMongoConfiguration && mongoConnected){ 
-    MongoDBKnowledgeBase mongoKB = new MongoDBKnowledgeBase(host, port, dbName, userName, Secret.fromString("passw0rd"), true, true);
+    //MongoDBKnowledgeBase(String host, int port, String dbName, String userName, Secret password, boolean enableStatistics, boolean successfulLogging)
+    MongoDBKnowledgeBase mongoKB = new MongoDBKnowledgeBase(host, port, dbName, userName, Secret.fromString("passw0rd"), enableStatistics, successfulLogging);
     instance.setKnowledgeBase(mongoKB);
     instance.save();
     println("MongoDB was configured as " + kdb);
