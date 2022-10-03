@@ -2,6 +2,22 @@
 ## Official Doc: https://plugins.jenkins.io/configuration-as-code/#plugin-content-getting-started
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  nodes:
+    - permanent:
+        labelString: "linux docker terraform"
+        mode: NORMAL
+        name: "docker-agent"
+        remoteFS: "/home/jenkins/agent"
+        launcher:
+          jnlp:
+            workDirSettings:
+              disabled: true
+              failIfWorkDirIsMissing: false
+              internalDir: "/home/jenkins/agent"
+              workDirPath: "/tmp"
+
+
+
 #Docs for DSL job using casc: https://github.com/jenkinsci/job-dsl-plugin/wiki/JCasC
 jobs:
   - script: >
@@ -19,3 +35,4 @@ jobs:
             }
           }
       }
+

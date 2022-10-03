@@ -12,9 +12,28 @@ services:
       - jenkins_home:/var/jenkins_home:Z
     ports:
       - 8080:8080
+      - 50000:50000
+    privileged: true 
+
+  jenkins-agent: 
+    environment: 
+      JENKINS_SECRET: "7c4e2d48de8fb9979c8cc5d1f640a07a7a62357e58eca260bc9f008450c71103" #(todo) - update secret programmatically
+      JENKINS_AGENT_NAME: "docker-agent"
+      JENKINS_URL: "http://jenkins:8080"
+      TERRAFORM_VERSION: "0.13.1"
+    build:
+      context: JenkinsDockerfile
+      dockerfile: JenkinsAgent.Dockerfile
+    volumes:
+      - jenkins_agent:/home/jenkins/agent:Z
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 22
+      - 50000
     privileged: true
 
 
 volumes: 
   jenkins_home:
+  jenkins_agent:
 
