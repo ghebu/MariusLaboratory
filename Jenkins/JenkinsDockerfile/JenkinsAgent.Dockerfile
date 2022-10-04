@@ -2,7 +2,7 @@
 
 FROM jenkins/inbound-agent
 USER 0 
-RUN apt update -y && apt install jq telnet -y 
+RUN apt update -y && apt install jq telnet curl -y 
 
  
 ENV TERRAFORM_VERSION=0.13.1
@@ -18,9 +18,13 @@ USER 1000
 
 WORKDIR /home/jenkins/agent
 RUN tfswitch $TERRAFORM_VERSION
-ENV JENKINS_SECRET="7c4e2d48de8fb9979c8cc5d1f640a07a7a62357e58eca260bc9f008450c71103"
-ENV JENKINS_AGENT_NAME="docker-agent"
-ENV JENKINS_URL="http://jenkins:8080"
 
+
+#RUN export TOKEN="$(curl -L -s -u ghebu:passw0rd  -X GET http://jenkins:8080/computer/docker-agent/slave-agent.jnlp | sed 's/.*<application-desc main-class=\"hudson.remoting.jnlp.Main\"><argument>\([a-z0-9]*\).*/\1/' | grep -E -o '<argument>.*</argument>'  | cut -d '>' -f2 | cut -d '<' -f1)"
+ARG TOKEN
+
+ENV JENKINS_SECRET=${TOKEN}   
+ENV JENKINS_URL="http://jenkins:8080"
+ENV JENKINS_AGENT="docker-agent"
 
 
