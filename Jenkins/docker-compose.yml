@@ -30,7 +30,7 @@ services:
         interval: 30s
         timeout: 10s
         retries: 5
-        start_period: 5s
+        #start_period: 5s
     volumes:
       - jenkins_agent:/home/jenkins/agent:Z
       - /var/run/docker.sock:/var/run/docker.sock

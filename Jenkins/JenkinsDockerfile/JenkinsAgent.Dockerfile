@@ -6,13 +6,18 @@ RUN apt update -y && apt install jq telnet curl -y
 
  
 ENV TERRAFORM_VERSION=0.13.1
-RUN  apt-get update &&  apt-get install -y gnupg software-properties-common wget curl
+RUN  apt-get update &&  apt-get install -y gnupg software-properties-common wget curl python3-pip 
 
 # Install terraform using tfswitch
 RUN curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
-RUN chown 1000 /usr/local/bin/tfswitch
+RUN find / -name terraform_${TERRAFORM_VERSION} -print0  | xargs -0 -I {} cp {}  /usr/local/bin/terraform  
+    
+
+# Install awscli 
+RUN pip install awscli
 
 
+RUN chown 1000 -R /usr/local/bin/
 
 USER 1000
 
