@@ -1,9 +1,9 @@
-folder('noaptea-companiilor') { 
+folder('noapteaCompaniilor') { 
   displayName('noaptea-companiilor')
   description('DSL jobs for Terraform')
 }
 
-pipelineJob('noaptea-companiilor/terraform') {
+pipelineJob('noapteaCompaniilor/terraform') {
     displayName('Terraform')
     description("Showcasing TF and Jenkins for Noaptea Companiilor event")
 
