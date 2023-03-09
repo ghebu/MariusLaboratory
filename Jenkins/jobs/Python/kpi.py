@@ -19,10 +19,10 @@ def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
 
     for job in jobs:
-        print(f"job looks like: {job}")
         build = server[job]
-        lgb = build.get_last_good_build()
-        print(lgb.get_revision())
+        print(build)
+        # lgb = build.get_last_good_build()
+        # print(lgb.get_revision())
 
 
 if __name__ == '__main__':
