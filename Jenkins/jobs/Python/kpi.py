@@ -14,4 +14,4 @@ def getSCMInfroFromLatestGoodBuild():
     # return lgb.get_revision()
 
 if __name__ == '__main__':
-    print(getSCMInfroFromLatestGoodBuild('http://localhost:8080'))
+    print(getSCMInfroFromLatestGoodBuild())
