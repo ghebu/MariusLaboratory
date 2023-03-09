@@ -18,10 +18,13 @@ def get_jobs():
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
 
+
     for job in jobs:
-        if server[job].get_last_good_build():
+        try: 
             build = server[job].get_last_good_build()
-        print(build)
+            print(build)
+        except NoBuildData as e:
+            continue 
         # lgb = build.get_last_good_build()
         # print(lgb.get_revision())
 
