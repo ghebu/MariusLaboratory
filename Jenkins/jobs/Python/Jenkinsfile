@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Run python code') {
             steps {
-                sh 'python3 kpi.py'
+                sh 'python3 Jenkins/jobs/Python/kpi.py'
             }
         }
     }
