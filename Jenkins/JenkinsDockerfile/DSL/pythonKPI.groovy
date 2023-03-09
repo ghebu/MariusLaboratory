@@ -16,7 +16,8 @@ pipelineJob('python/python-kpi') {
             scm{
                 git {
                     remote{
-                        url("https://github.com/ghebu/noaptea-companiilor22")
+                        url("git@github.com:ghebu/MariusLaboratory.git")
+                        credentials('github')
                     }
                     branch("*/main")
                 }
