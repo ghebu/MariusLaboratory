@@ -23,7 +23,7 @@ def get_scm_info_from_latest_successful_build():
         try: 
             build = server[job].get_last_good_build()
             lgb = build.get_last_good_build()
-            pprint(dir(lgb))
+            pprint(lgb)
             revision = lgb.get_revision()
             print(f"The build {build} with the # {lgb} has the revision {revision}")
         except Exception as e:
