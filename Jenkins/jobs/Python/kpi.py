@@ -8,8 +8,11 @@ url = 'http://localhost:8080'
 
 def getSCMInfroFromLatestGoodBuild():
     server = Jenkins(url, username, password)
-    print(server)
-    pprint(dir(server))
+    jobs = server.keys()
+    pprint(jobs)
+    
+    #pprint(dir(server))
+    
     # jobs = J[jobName]
     # lgb = job.get_last_good_build()
     # return lgb.get_revision()
