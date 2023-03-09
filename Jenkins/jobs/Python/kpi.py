@@ -23,7 +23,7 @@ def get_scm_info_from_latest_successful_build():
         try: 
             build = server[job].get_last_good_build()
             print(build)
-        except NoBuildData as e:
+        except Exception as e:
             continue 
         # lgb = build.get_last_good_build()
         # print(lgb.get_revision())
