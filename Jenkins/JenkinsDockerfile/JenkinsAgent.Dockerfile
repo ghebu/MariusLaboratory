@@ -5,7 +5,7 @@ USER 0
 RUN apt update -y && apt install jq telnet curl -y 
 
  
-ENV TERRAFORM_VERSION=0.13.1
+ENV TERRAFORM_VERSION=1.4.0
 RUN  apt-get update &&  apt-get install -y gnupg software-properties-common wget curl python3-pip 
 
 # Install terraform using tfswitch
