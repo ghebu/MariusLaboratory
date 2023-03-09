@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run python code') {
+            steps {
+                sh 'python3 kpi.py'
+            }
+        }
+    }
+}
