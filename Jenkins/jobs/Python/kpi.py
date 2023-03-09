@@ -1,6 +1,6 @@
 from pprint import pprint
-import jenkins
-from jenkins import jenkins.Jenkins
+#import jenkins
+from jenkinsapi.jenkins import Jenkins
 
 username = 'ghebu'
 password = 'passw0rd'
