@@ -23,7 +23,7 @@ def get_scm_info_from_latest_successful_build():
         try: 
             build = server[job]
             lgb = build.get_last_good_build()
-            pprint(dir(lgb))
+            pprint(lgb._get_git_repo_url())
             revision = lgb.get_revision()
             print(f"The build {build} with the # {lgb} has the revision {revision}")
         except Exception as e:
