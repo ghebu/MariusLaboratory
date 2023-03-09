@@ -13,15 +13,14 @@ def get_jobs():
     jobs = server.keys()
     pprint(jobs)
     #pprint(dir(server))
-
     return jobs
 
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
 
     for job in jobs:
-        job = server[job]
-        lgb = job.get_last_good_build()
+        build = server[job]
+        lgb = build.get_last_good_build()
         print(lgb.get_revision())
 
 
