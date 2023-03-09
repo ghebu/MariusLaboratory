@@ -21,7 +21,7 @@ def get_scm_info_from_latest_successful_build():
 
     for job in jobs:
         try: 
-            build = server[job].get_last_good_build()
+            build = server[job]
             lgb = build.get_last_good_build()
             pprint(lgb)
             revision = lgb.get_revision()
