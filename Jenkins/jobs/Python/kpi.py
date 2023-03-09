@@ -4,6 +4,7 @@ import jenkins
 username = 'ghebu'
 password = 'passw0rd'
 url = 'http://localhost:8080'
+
 def getSCMInfroFromLatestGoodBuild():
     server = Jenkins(url, username, password)
     print(server)
@@ -13,4 +14,4 @@ def getSCMInfroFromLatestGoodBuild():
     # return lgb.get_revision()
 
 if __name__ == '__main__':
-    print getSCMInfroFromLatestGoodBuild('http://localhost:8080')
+    print(getSCMInfroFromLatestGoodBuild('http://localhost:8080'))
