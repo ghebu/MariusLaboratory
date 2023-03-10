@@ -3,7 +3,8 @@ from pprint import pprint
 from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.build import Build
 import requests
-from dateutil import parser
+from time import strftime, localtime
+
 
 username = 'ghebu'
 password = 'passw0rd'
@@ -52,7 +53,7 @@ def get_build_info():
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
-    build_date = parser.parse(response['timestamp'])
+    build_date = strftime('%Y-%m-%d %H:%M:%S', localtime(response['timestamp']))
     pprint(response, build_date)
 
 
