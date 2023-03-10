@@ -10,7 +10,7 @@ username = 'ghebu'
 password = 'passw0rd'
 jenkins_url = 'http://localhost:8080'
 server = Jenkins(jenkins_url, username, password)
-Build('http://localhost:8080/job/python/job/python-kpi', 17, 'python-kpi')
+Build('http://localhost:8080/', 17, 'python-kpi')
 pprint(f"BUILD INFO: {Build}")
 
 jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
