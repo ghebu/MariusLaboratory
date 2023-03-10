@@ -23,7 +23,8 @@ def get_scm_info_from_latest_successful_build():
         try: 
             build = server[job]
 
-            pprint(build.get_build_ids())
+            for b in build.get_build_ids():
+                print(b)
 
             lgb = build.get_last_good_build()
             git_url = lgb._get_git_repo_url()
