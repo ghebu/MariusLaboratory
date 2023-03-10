@@ -7,7 +7,7 @@ username = 'ghebu'
 password = 'passw0rd'
 url = 'http://localhost:8080'
 server = Jenkins(url, username, password)
-
+pprint(dir(server))
 
 
 def get_jobs():
@@ -23,7 +23,7 @@ def get_scm_info_from_latest_successful_build():
     for job in jobs:
         try: 
             build = server[job]
-            list_of_builds = [[b for b in build.get_build_ids()]]
+            list_of_builds = [b for b in build.get_build_ids()]
             print(f"the job {job} has the builds {list_of_builds}")
             get_build_info(job, list_of_builds)
             lgb = build.get_last_good_build()
