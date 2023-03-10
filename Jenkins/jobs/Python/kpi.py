@@ -9,9 +9,7 @@ password = 'passw0rd'
 jenkins_url = 'http://localhost:8080'
 server = Jenkins(jenkins_url, username, password)
 
-#jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)', auth=(username, password)).text
 jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
-print(jenkins_crumb['crumbRequestField'], jenkins_crumb['crumb'])
 
 def get_jobs():
     jobs = server.keys()
@@ -50,7 +48,8 @@ def get_scm_info_from_latest_successful_build():
 def get_build_info():
     
     response = requests.get('http://localhost:8080/job/python/job/python-kpi/17', 
-                            auth=(username, password))
+                            auth=(username, password),
+                            headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']})
     pprint(response.content)
 
 
