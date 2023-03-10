@@ -3,6 +3,7 @@ from pprint import pprint
 from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.build import Build
 import requests
+from dateutil import parser
 
 username = 'ghebu'
 password = 'passw0rd'
@@ -50,7 +51,9 @@ def get_build_info():
     response = requests.get('http://localhost:8080/job/python/job/python-kpi/17/api/json', 
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
-    pprint(response)
+    
+    build_date = parser.parse(response['timestamp'])
+    pprint(response, build_date)
 
 
 if __name__ == '__main__':
