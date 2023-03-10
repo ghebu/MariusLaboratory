@@ -47,7 +47,7 @@ def get_scm_info_from_latest_successful_build():
 
 def get_build_info():
     
-    response = requests.get('http://localhost:8080/job/python/job/python-kpi/17', 
+    response = requests.get('http://localhost:8080/job/python/job/python-kpi/17/api/json', 
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']})
     pprint(response.content)
