@@ -10,6 +10,8 @@ username = 'ghebu'
 password = 'passw0rd'
 jenkins_url = 'http://localhost:8080'
 server = Jenkins(jenkins_url, username, password)
+Build('http://localhost:8080/job/python/job/python-kpi', 17, 'python-kpi')
+pprint(f"BUILD INFO: {Build}")
 
 jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
 
@@ -53,9 +55,10 @@ def get_build_info():
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
-    
+    ##Get the job timestamp
     timestamp = int(str(response['timestamp'])[:10])
     timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
+
 
     
     pprint(response)
