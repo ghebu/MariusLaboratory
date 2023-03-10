@@ -2,6 +2,7 @@ from pprint import pprint
 #https://jenkinsapi.readthedocs.io/en/latest/index.html
 from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.build import Build
+import requests
 
 username = 'ghebu'
 password = 'passw0rd'
@@ -36,15 +37,20 @@ def get_scm_info_from_latest_successful_build():
         except Exception as e:
             continue 
 
-def get_build_info(job, builds=[]): 
+# def get_build_info(job, builds=[]): 
     
-    for build_no in builds: 
-        build = Build(url, build_no, job)
-        pprint(build)
-    print(Build(url, 28, 'tests/warning').is_running())
+#     for build_no in builds: 
+#         build = Build(url, build_no, job)
+#         pprint(build)
+#     print(Build(url, 28, 'tests/warning').is_running())
        
 
+def get_build_info(url, builds=[]):
+    
+    response = requests.get('http://localhost:8080/job/python/job/python-kpi/17')
+    pprint(response.json())
 
+    
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
 
