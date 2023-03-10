@@ -3,7 +3,7 @@ from pprint import pprint
 from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.build import Build
 import requests
-from time import strftime, localtime
+from datetime import datetime
 
 
 username = 'ghebu'
@@ -53,7 +53,7 @@ def get_build_info():
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
-    build_date = datetime.datetime.fromtimestamp(response['timestamp']).isoformat()
+    build_date = datetime.fromtimestamp(response['timestamp']).isoformat()
 
     
     pprint(response)
