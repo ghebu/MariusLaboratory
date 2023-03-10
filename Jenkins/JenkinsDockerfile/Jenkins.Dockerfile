@@ -5,7 +5,7 @@ ENV CASC_JENKINS_CONFIG=$JENKINS_HOME/casc_configs/
 USER 0 
 
 ## Updating and installing the packages as root user
-RUN apt update -y && apt install vim curl telnet -y
+RUN apt update -y && apt install vim curl telnet python3-pip -y
 
 ## Copy utilitarians
 COPY scripts/plugins.txt /tmp/plugins.txt
@@ -19,6 +19,7 @@ RUN pluginsList=$(cat /tmp/plugins.txt | grep -vi '^#' | tr "\n" " ") && \
 ## Configuration-as-code & groovy init folder creation
 RUN mkdir -p $JENKINS_HOME/{init.groovy.d,casc_configs}
 RUN chown -R jenkins.jenkins $JENKINS_HOME/casc_configs $JENKINS_HOME/init.groovy.d
+RUN pip3 install python-jenkins jenkinsapi    
 
 
 ##Switching to Jenkins user

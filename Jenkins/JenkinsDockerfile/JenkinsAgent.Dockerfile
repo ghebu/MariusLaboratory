@@ -11,7 +11,7 @@ RUN  apt-get update &&  apt-get install -y gnupg software-properties-common wget
 # Install terraform using tfswitch
 RUN curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
 RUN find / -name terraform_${TERRAFORM_VERSION} -print0  | xargs -0 -I {} cp {}  /usr/local/bin/terraform  
-    
+RUN pip3 install python-jenkins jenkinsapi    
 
 # Install awscli 
 RUN pip install awscli
