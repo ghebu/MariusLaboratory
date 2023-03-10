@@ -48,7 +48,7 @@ def get_scm_info_from_latest_successful_build():
 def get_build_info():
     
     response = requests.get('http://localhost:8080/job/python/job/python-kpi/17')
-    pprint(response.json())
+    pprint(response.content)
 
 
 if __name__ == '__main__':
