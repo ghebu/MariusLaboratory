@@ -54,7 +54,7 @@ def get_build_info():
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
     build_date = strftime('%Y-%m-%d %H:%M:%S', localtime(response['timestamp']))
-    pprint(response, build_date)
+    pprint(build_date)
 
 
 if __name__ == '__main__':
