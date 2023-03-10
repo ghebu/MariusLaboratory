@@ -6,9 +6,13 @@ import requests
 
 username = 'ghebu'
 password = 'passw0rd'
-url = 'http://localhost:8080'
-server = Jenkins(url, username, password)
+jenkins_url = 'http://localhost:8080'
+server = Jenkins(jenkins_url, username, password)
 
+##Get CRUMB 
+req = requests.get(f"http://{jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)", auth=(username, password))
+crumb = req.text
+print(f"crumb: {crumb}")
 
 
 def get_jobs():
