@@ -38,6 +38,7 @@ def get_build_info(job, builds=[]):
     for build_no in builds: 
         build = Build(url, build_no, job)
         pprint(build)
+    print(Build(url, 28, 'tests/warning'))
        
 
 
