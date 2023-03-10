@@ -7,7 +7,7 @@ username = 'ghebu'
 password = 'passw0rd'
 url = 'http://localhost:8080'
 server = Jenkins(url, username, password)
-pprint(dir(server))
+pprint(server.get_jobs_info())
 
 
 def get_jobs():
