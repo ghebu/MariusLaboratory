@@ -11,7 +11,7 @@ server = Jenkins(jenkins_url, username, password)
 
 #jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)', auth=(username, password)).text
 jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
-print(jenkins_crumb)
+print(jenkins_crumb['crumbRequestField'], jenkins_crumb['crumb'])
 
 def get_jobs():
     jobs = server.keys()
