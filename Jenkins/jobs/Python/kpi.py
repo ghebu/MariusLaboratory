@@ -1,5 +1,5 @@
 from pprint import pprint
-#import jenkins
+#https://jenkinsapi.readthedocs.io/en/latest/index.html
 from jenkinsapi.jenkins import Jenkins
 
 username = 'ghebu'
@@ -23,7 +23,7 @@ def get_scm_info_from_latest_successful_build():
         try: 
             build = server[job]
 
-            pprint(build.__dir__)
+            pprint(dir(build))
 
             lgb = build.get_last_good_build()
             git_url = lgb._get_git_repo_url()
