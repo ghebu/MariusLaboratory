@@ -53,7 +53,8 @@ def get_build_info():
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
-    build_date = strftime('%Y-%m-%d %H:%M:%S', localtime(response['timestamp']))
+    build_date = datetime.datetime.fromtimestamp(response['timestamp']).isoformat()
+
     
     pprint(response)
     pprint(build_date)
