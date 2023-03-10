@@ -53,11 +53,13 @@ def get_build_info():
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
-    build_date = datetime.fromtimestamp(int(str(response['timestamp'])[:10])).isoformat()
+    
+    timestamp = int(str(response['timestamp'])[:10])
+    timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
 
     
     pprint(response)
-    pprint(build_date)
+    pprint(timestamp_human_readable)
     
 
 if __name__ == '__main__':
