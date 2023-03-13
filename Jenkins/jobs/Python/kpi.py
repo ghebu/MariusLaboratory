@@ -32,12 +32,9 @@ def get_scm_info_from_latest_successful_build():
             build = server[short_job_name]
             list_of_builds = [b for b in build.get_build_ids()]
             
-            last_build = build.get_last_build()._get_git_repo_url()
-            print(f"last build: {last_build}")
-
-            
+            git_url = build.get_last_build()._get_git_repo_url()
             job_url =job[0]
-            pprint(get_build_info(job_url, short_job_name, list_of_builds))
+            pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url))
             
 
             print(f"the job {short_job_name} has the builds {list_of_builds}")
@@ -45,17 +42,17 @@ def get_scm_info_from_latest_successful_build():
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
             
 
-            lgb = build.get_last_good_build()
-            git_url = lgb._get_git_repo_url()
-            revision = lgb.get_revision()
-            print(f"The build {build} with the # {lgb} has the revision {revision} and the git url {git_url}")
+            # lgb = build.get_last_good_build()
+            # git_url = lgb._get_git_repo_url()
+            # revision = lgb.get_revision()
+            # print(f"The build {build} with the # {lgb} has the revision {revision} and the git url {git_url}")
         except Exception as e:
             continue 
 
 
        
 
-def get_build_info(job_url, job_name, list_of_builds):
+def get_build_info(job_url, job_name, list_of_builds, git_url):
     
     job_results = {}
 
