@@ -33,7 +33,7 @@ def get_scm_info_from_latest_successful_build():
             
             print(f"the job {job} has the builds {list_of_builds}")
             
-            #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
+            pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
 
             lgb = build.get_last_good_build()
             git_url = lgb._get_git_repo_url()
@@ -50,9 +50,9 @@ def get_scm_info_from_latest_successful_build():
 #     print(Build(url, 28, 'tests/warning').is_running())
        
 
-def get_build_info():
+def get_build_info(jenkins_url):
     
-    response = requests.get('http://localhost:8080/job/python/job/python-kpi/17/api/json', 
+    response = requests.get(f'{jenkins_url}/job/python/job/python-kpi/17/api/json', 
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
@@ -60,6 +60,7 @@ def get_build_info():
     timestamp = int(str(response['timestamp'])[:10])
     timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
 
+    
 
     
     pprint(response)
@@ -68,7 +69,7 @@ def get_build_info():
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
-    get_build_info()
+    get_build_info(jenkins_url)
     
 
 
