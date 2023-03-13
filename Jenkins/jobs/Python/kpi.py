@@ -32,6 +32,10 @@ def get_scm_info_from_latest_successful_build():
             build = server[short_job_name]
             list_of_builds = [b for b in build.get_build_ids()]
             
+            last_build = build.get_last_build()._get_git_repo_url()
+            print(f"last build: {last_build}")
+
+            
             job_url =job[0]
             pprint(get_build_info(job_url, short_job_name, list_of_builds))
             
@@ -40,6 +44,7 @@ def get_scm_info_from_latest_successful_build():
             
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
             
+
             lgb = build.get_last_good_build()
             git_url = lgb._get_git_repo_url()
             revision = lgb.get_revision()
@@ -64,7 +69,7 @@ def get_build_info(job_url, job_name, list_of_builds):
         ##Get the job timestamp
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
-        author = response['actions'][0]['causes'][0]['userId'] ##alternative userName can be used.
+        author = response['actions'][0]['causes'][0]['userName'] ##alternative userId can be used.
 
         payload = {
             'url' : job_url,
@@ -75,10 +80,7 @@ def get_build_info(job_url, job_name, list_of_builds):
         }
 
         job_results[job_name + '_' + timestamp_human_readable] = payload
-        # if job_url not in job_results:
-        #     job_results[job_url] = payload 
-        # else:
-        #     job_results[job_url] += payload
+
         
     pprint(response)
     return job_results
