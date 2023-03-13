@@ -32,7 +32,7 @@ def get_scm_info_from_latest_successful_build():
             list_of_builds = [b for b in build.get_build_ids()]
             
             job_url =job[0]
-            print(get_build_info(job_url, list_of_builds))
+            pprint(get_build_info(job_url, list_of_builds))
             
             print(f"the job {job[1]} has the builds {list_of_builds}")
             
