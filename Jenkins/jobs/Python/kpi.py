@@ -31,9 +31,9 @@ def get_scm_info_from_latest_successful_build():
             short_job_name = job[1]
             build = server[short_job_name]
             list_of_builds = [b for b in build.get_build_ids()]
-            scm_url = build.get_scm_url()
+            
             job_url =job[0]
-            pprint(get_build_info(job_url, short_job_name, list_of_builds, scm_url))
+            pprint(get_build_info(job_url, short_job_name, list_of_builds))
             
 
             print(f"the job {short_job_name} has the builds {list_of_builds}")
@@ -50,7 +50,7 @@ def get_scm_info_from_latest_successful_build():
 
        
 
-def get_build_info(job_url, job_name, list_of_builds, scm_url):
+def get_build_info(job_url, job_name, list_of_builds):
     
     job_results = {}
 
@@ -71,7 +71,7 @@ def get_build_info(job_url, job_name, list_of_builds, scm_url):
             'url' : job_url,
             'build' : build,
             'author' : author,
-            'git_url' : scm_url,
+            'git_url' : 'TODO',
             'timestamp': timestamp_human_readable
         }
 
