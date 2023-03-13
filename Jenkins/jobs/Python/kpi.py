@@ -32,7 +32,7 @@ def get_scm_info_from_latest_successful_build():
             list_of_builds = [b for b in build.get_build_ids()]
             
             job_url = job[0]
-            get_build_info(job_url)
+            print(get_build_info(job_url))
             
             print(f"the job {job[1]} has the builds {list_of_builds}")
             
@@ -49,7 +49,8 @@ def get_scm_info_from_latest_successful_build():
        
 
 def get_build_info(job_url):
-    
+    print(job_url)
+
     response = requests.get(f'{job_url}/api/json', 
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
@@ -67,7 +68,7 @@ def get_build_info(job_url):
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
-    
+    print(get_build_info('http://localhost:8080/job/tests/job/warning'))
 
 
 
