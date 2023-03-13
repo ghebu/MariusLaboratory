@@ -28,13 +28,15 @@ def get_scm_info_from_latest_successful_build():
     for job in jobs:
         print(f"JOB: {job}")
         try: 
-            build = server[job[1]]
+            short_job_name = job[1]
+            build = server[short_job_name]
             list_of_builds = [b for b in build.get_build_ids()]
             
+
             job_url =job[0]
-            pprint(get_build_info(job_url, job[1] list_of_builds))
+            pprint(get_build_info(job_url, short_job_name, list_of_builds))
             
-            print(f"the job {job[1]} has the builds {list_of_builds}")
+            print(f"the job {short_job_name} has the builds {list_of_builds}")
             
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
             
