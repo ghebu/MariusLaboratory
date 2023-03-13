@@ -72,7 +72,7 @@ def get_build_info(job_url, list_of_builds):
             'timestamp': timestamp_human_readable
         }
 
-        job_results[job_url] += payload
+        job_results[job_url + '_' + timestamp_human_readable] = payload
         # if job_url not in job_results:
         #     job_results[job_url] = payload 
         # else:
