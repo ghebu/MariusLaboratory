@@ -5,7 +5,12 @@ from jenkinsapi.build import Build
 import requests
 from datetime import datetime
 
+"""
+TODO
 
+Get build duration
+
+"""
 username = 'ghebu'
 password = 'passw0rd'
 jenkins_url = 'http://localhost:8080'
@@ -67,13 +72,16 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
         author = response['actions'][0]['causes'][0]['userName'] ##alternative userId can be used.
+        duration = response['duration'] / 1000 #ms to seconds transformation
+
 
         payload = {
             'url' : job_url,
             'build' : build,
             'author' : author,
             'git_url' : git_url,
-            'timestamp': timestamp_human_readable
+            'timestamp': timestamp_human_readable,
+            'build_duration': duration
         }
 
         job_results[job_name + '_' + timestamp_human_readable] = payload
