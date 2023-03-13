@@ -80,7 +80,7 @@ def get_build_info(job_url, job_name, list_of_builds):
         # else:
         #     job_results[job_url] += payload
         
-        # pprint(response)
+    pprint(response)
     return job_results
 
 
