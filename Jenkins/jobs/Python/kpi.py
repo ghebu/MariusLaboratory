@@ -64,12 +64,12 @@ def get_build_info(job_url, job_name, list_of_builds):
         ##Get the job timestamp
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
-        author = response['actions'][0]['causes']['userId'] ##alternative userName can be used.
+        #author = response['actions'][0]['causes']['userId'] ##alternative userName can be used.
 
         payload = {
             'url' : job_url,
             'build' : build,
-            'author' : author,
+            'author' : 'TODO',
             'git_url' : 'TODO',
             'timestamp': timestamp_human_readable
         }
