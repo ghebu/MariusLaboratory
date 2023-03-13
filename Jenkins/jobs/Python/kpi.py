@@ -31,6 +31,9 @@ def get_scm_info_from_latest_successful_build():
             build = server[job[1]]
             list_of_builds = [b for b in build.get_build_ids()]
             
+            job_url = job[0]
+            get_build_info(job_url)
+            
             print(f"the job {job[1]} has the builds {list_of_builds}")
             
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
@@ -45,9 +48,9 @@ def get_scm_info_from_latest_successful_build():
 
        
 
-def get_build_info(jenkins_url):
+def get_build_info(job_url):
     
-    response = requests.get(f'{jenkins_url}/job/python/job/python-kpi/17/api/json', 
+    response = requests.get(f'{job_url}/api/json', 
                             auth=(username, password),
                             headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
     
@@ -64,7 +67,6 @@ def get_build_info(jenkins_url):
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
-    get_build_info(jenkins_url)
     
 
 
