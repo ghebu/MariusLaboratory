@@ -25,7 +25,7 @@ def get_jobs():
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
 
-
+    print(jobs)
     for job in jobs:
         try: 
             build = server[job]
@@ -34,7 +34,6 @@ def get_scm_info_from_latest_successful_build():
             print(f"the job {job} has the builds {list_of_builds}")
             
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
-            print(f"Full name: {[z for z in server.get_jobs_info()]}")
             
             lgb = build.get_last_good_build()
             git_url = lgb._get_git_repo_url()
