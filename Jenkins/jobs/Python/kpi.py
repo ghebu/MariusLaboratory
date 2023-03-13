@@ -50,7 +50,11 @@ def get_scm_info_from_latest_successful_build():
 
 def get_build_info(job_url, list_of_builds):
     
+    job_results = {}
+
+
     for build in list_of_builds:
+        
         response = requests.get(f'{job_url}/{build}/api/json', 
                                 auth=(username, password),
                                 headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
@@ -59,11 +63,24 @@ def get_build_info(job_url, list_of_builds):
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
 
-        
 
+        payload = {
+            'url' : job_url,
+            'build' : build,
+            'author' : 'TODO',
+            'git_url' : 'TODO',
+            'timestamp': timestamp_human_readable
+        }
+
+
+        if job_url not in job_results:
+            job_results[job_url] = payload 
+        else:
+            job_results[job_url] += payload
         
         pprint(response)
-        pprint(timestamp_human_readable)
+        return job_results
+
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
