@@ -31,8 +31,8 @@ def get_scm_info_from_latest_successful_build():
             build = server[job[1]]
             list_of_builds = [b for b in build.get_build_ids()]
             
-            job_url = job[0]
-            print(get_build_info(job_url))
+            job_url =job[0]
+            print(get_build_info(job_url, list_of_builds))
             
             print(f"the job {job[1]} has the builds {list_of_builds}")
             
@@ -48,22 +48,22 @@ def get_scm_info_from_latest_successful_build():
 
        
 
-def get_build_info(job_url):
-    print(job_url)
-
-    response = requests.get(f'{job_url}/api/json', 
-                            auth=(username, password),
-                            headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
+def get_build_info(job_url, list_of_builds):
     
-    ##Get the job timestamp
-    timestamp = int(str(response['timestamp'])[:10])
-    timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
+    for build in list_of_builds:
+        response = requests.get(f'{job_url}/{build}/api/json', 
+                                auth=(username, password),
+                                headers={jenkins_crumb['crumbRequestField'] : jenkins_crumb['crumb']}).json()
+        
+        ##Get the job timestamp
+        timestamp = int(str(response['timestamp'])[:10])
+        timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
 
-    
+        
 
-    
-    pprint(response)
-    pprint(timestamp_human_readable)
+        
+        pprint(response)
+        pprint(timestamp_human_readable)
     return response
 
 if __name__ == '__main__':
