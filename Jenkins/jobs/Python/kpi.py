@@ -32,7 +32,7 @@ def get_scm_info_from_latest_successful_build():
             list_of_builds = [b for b in build.get_build_ids()]
             
             job_url =job[0]
-            pprint(get_build_info(job_url, list_of_builds))
+            pprint(get_build_info(job_url, job[1] list_of_builds))
             
             print(f"the job {job[1]} has the builds {list_of_builds}")
             
@@ -48,7 +48,7 @@ def get_scm_info_from_latest_successful_build():
 
        
 
-def get_build_info(job_url, list_of_builds):
+def get_build_info(job_url, job_name, list_of_builds):
     
     job_results = {}
 
@@ -72,7 +72,7 @@ def get_build_info(job_url, list_of_builds):
             'timestamp': timestamp_human_readable
         }
 
-        job_results[job_url + '_' + timestamp_human_readable] = payload
+        job_results[job_name + '_' + timestamp_human_readable] = payload
         # if job_url not in job_results:
         #     job_results[job_url] = payload 
         # else:
