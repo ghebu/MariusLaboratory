@@ -17,21 +17,21 @@ server = Jenkins(jenkins_url, username, password)
 jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
 
 def get_jobs():
-    jobs = server.keys()
+    # jobs = server.keys()
+    jobs = [z for z in server.get_jobs_info()]
     pprint(jobs)
-    #pprint(dir(server))
     return jobs
 
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
-
     print(jobs)
     for job in jobs:
+        print(f"JOB: {job}")
         try: 
-            build = server[job]
+            build = server[job[1]]
             list_of_builds = [b for b in build.get_build_ids()]
             
-            print(f"the job {job} has the builds {list_of_builds}")
+            print(f"the job {job[1]} has the builds {list_of_builds}")
             
             #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
             
