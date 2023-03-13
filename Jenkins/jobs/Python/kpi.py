@@ -84,8 +84,7 @@ def get_build_info(job_url, list_of_builds):
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
-    print(get_build_info('http://localhost:8080/job/tests/job/warning'))
-
+    
 
 
 
