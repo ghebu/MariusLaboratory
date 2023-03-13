@@ -72,9 +72,7 @@ def get_build_info(job_url, list_of_builds):
             'timestamp': timestamp_human_readable
         }
 
-        job_results.update({job_url : 
-                                { timestamp_human_readable: {payload} }
-                            })
+        job_results[job_url] += timestamp_human_readable
         # if job_url not in job_results:
         #     job_results[job_url] = payload 
         # else:
