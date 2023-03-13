@@ -63,7 +63,7 @@ def get_build_info(job_url):
     
     pprint(response)
     pprint(timestamp_human_readable)
-    
+    return response
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
