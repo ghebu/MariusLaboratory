@@ -79,12 +79,12 @@ def get_build_info(job_url, list_of_builds):
             job_results[job_url] += payload
         
         pprint(response)
-        return job_results
+    return job_results
 
 
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
-    
+
 
 
 
