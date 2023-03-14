@@ -74,7 +74,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         result = response['result'] 
 
 
-
+        department = None
         if 'bitbucket' in git_url: 
             department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
         elif 'code.connected' in git_url: 
