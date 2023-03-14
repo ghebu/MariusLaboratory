@@ -44,15 +44,8 @@ def get_scm_info_from_latest_successful_build():
             pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url))
             
 
-            print(f"the job {short_job_name} has the builds {list_of_builds}")
+            print(f"The job {short_job_name} has the builds {list_of_builds}")
             
-            #pprint(dir(build)) #functions: get_last_buildnumber, http://localhost:8080/job/python/job/python-kpi/19/console
-            
-
-            # lgb = build.get_last_good_build()
-            # git_url = lgb._get_git_repo_url()
-            # revision = lgb.get_revision()
-            # print(f"The build {build} with the # {lgb} has the revision {revision} and the git url {git_url}")
         except Exception as e:
             continue 
 
@@ -75,7 +68,10 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
         author = response['actions'][0]['causes'][0]['userName'] ##alternative userId can be used.
         duration = response['duration'] / 1000 #ms to seconds transformation
-        
+        result = response['result'] 
+
+
+
         if 'bitbucket' in git_url: 
             department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
         elif 'code.connected' in git_url: 
@@ -93,10 +89,12 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
             'git_url' : git_url,
             'timestamp': timestamp_human_readable,
             'build_duration': f"{duration} seconds",
-            #'department' : department, 
+            'isFailed' : result, 
+            'department' : department, 
             #'app_name' : app
         }
 
+        
         job_results[job_name + '_' + timestamp_human_readable] = payload
 
         
