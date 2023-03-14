@@ -39,7 +39,7 @@ def get_scm_info_from_latest_successful_build():
             build = server[short_job_name]
             list_of_builds = [b for b in build.get_build_ids()]
             
-            git_url = build.get_last_build()._get_git_repo_url()
+            git_url = build.get_last_build()._get_git_repo_url() if build.get_last_build()._get_git_repo_url() else 'none'
             job_url =job[0]
             pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url))
             
@@ -110,3 +110,4 @@ if __name__ == '__main__':
 
 # TESTS
 #get_joburl_and_name = [z for z in server.get_jobs_info()]
+
