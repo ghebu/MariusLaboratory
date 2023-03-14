@@ -85,7 +85,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
 
         app = git_url.split('/')[4] if git_url.find('https') else git_url.split('/')[5]
 
-
+        pprint(f"department and app: {department}, {app}")
         payload = {
             'url' : job_url,
             'build' : build,
@@ -94,7 +94,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
             'timestamp': timestamp_human_readable,
             'build_duration': duration,
             #'department' : department, 
-            'app_name' : app
+            #'app_name' : app
         }
 
         job_results[job_name + '_' + timestamp_human_readable] = payload
