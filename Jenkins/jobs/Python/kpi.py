@@ -30,7 +30,7 @@ def get_jobs():
     return jobs
 
 def get_department(git_url):
-    department = None
+    department = ''
 
     if 'bitbucket' in git_url: 
         department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
