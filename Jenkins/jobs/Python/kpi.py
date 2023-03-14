@@ -51,11 +51,15 @@ def get_author(response):
     # if 'causes' in response['action'][0]: 
     #     author = response['actions'][0]['causes'][0]['userName']
     #     return author
+    try: 
+        author = response['actions'][0]['causes'][0]['userName']
+        return author
+    except Exception as e:
     
-    for action in response['actions']:
-        if 'causes' in action:
-            author = action['causes'][0]['userName']  
-    
+        for action in response['actions']:
+            if 'causes' in action:
+                author = action['causes'][0]['userName']  
+        
     return author
 
 def get_scm_info_from_latest_successful_build(short_job_name):
@@ -89,7 +93,6 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
         author = get_author(response)
         duration = response['duration'] / 1000 #ms to seconds transformation
         result = response['result'] 
-        print(author)
 
         #app = git_url.split('/')[4] if git_url.find('https') else git_url.split('/')[5]
 
