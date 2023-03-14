@@ -29,6 +29,8 @@ def get_jobs():
     pprint(jobs)
     return jobs
 
+    department = None
+
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
     print(jobs)
@@ -44,11 +46,18 @@ def get_scm_info_from_latest_successful_build():
             except Exception as e: 
                 git_url = None
 
+            if 'bitbucket' in git_url: 
+                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
+            elif 'code.connected' in git_url: 
+                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','') 
+            elif 'github' in git_url: 
+                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','')
+
             job_url =job[0]
 
             print(f"The job {short_job_name} has the builds {list_of_builds}. ")
-            print(f"requirements for get_build_info: {job_url}, {short_job_name}, {list_of_builds}, {git_url}")
-            pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url))
+            print(f"requirements for get_build_info: {job_url}, {short_job_name}, {list_of_builds}, {git_url}, {department}")
+            pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url, department))
             
 
         
@@ -62,13 +71,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
     
     job_results = {}
 
-    department = None
-    if 'bitbucket' in git_url: 
-        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
-    elif 'code.connected' in git_url: 
-        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','') 
-    elif 'github' in git_url: 
-        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','')
+
 
     for build in list_of_builds:
         
