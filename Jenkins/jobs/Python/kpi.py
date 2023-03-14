@@ -66,7 +66,10 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         ##Get the job timestamp
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
-        author = response['actions'][0]['causes'][0]['userName'] ##alternative userId can be used.
+        
+        for action in response['actions']:
+            if 'causes' in action:
+                author = action['causes'][0]['userName']  
         duration = response['duration'] / 1000 #ms to seconds transformation
         result = response['result'] 
 
