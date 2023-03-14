@@ -93,7 +93,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
             'git_url' : git_url,
             'timestamp': timestamp_human_readable,
             'build_duration': duration,
-            'department' : department, 
+            #'department' : department, 
             'app_name' : app
         }
 
