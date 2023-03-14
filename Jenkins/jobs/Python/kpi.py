@@ -37,14 +37,16 @@ def get_scm_info_from_latest_successful_build():
         try: 
             short_job_name = job[1]
             build = server[short_job_name]
-            list_of_builds = [b for b in build.get_build_ids()]
+            list_of_builds = [b for b in build.get_build_ids()]   ##The method doesn't work for some of the builds
             
             git_url = build.get_last_build()._get_git_repo_url() if build.get_last_build()._get_git_repo_url() else 'none'
             job_url =job[0]
+
+            print(f"The job {short_job_name} has the builds {list_of_builds}")
+
             pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url))
             
 
-            print(f"The job {short_job_name} has the builds {list_of_builds}")
             
         except Exception as e:
             continue 
