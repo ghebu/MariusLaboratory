@@ -35,7 +35,7 @@ def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
     print(jobs)
     for job in jobs:
-        print(f"JOB: {job}")
+        #print(f"JOB: {job}")
         try: 
             short_job_name = job[1]
             build = server[short_job_name]
