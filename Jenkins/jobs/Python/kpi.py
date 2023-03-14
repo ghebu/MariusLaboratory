@@ -116,10 +116,9 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
 if __name__ == '__main__':
     print(get_scm_info_from_latest_successful_build())
 
-
+    #pprint(get_build_info('http://localhost:8080/job/tests/job/warning', 'tests/warning', [10,9,8], 'none', ''))
 
 
 # TESTS
 #get_joburl_and_name = [z for z in server.get_jobs_info()]
-    print('checking the job for tests/warning')
-    pprint(get_build_info('http://localhost:8080/job/tests/job/warning', 'tests/warning', [10,9,8], 'none', ''))
+   
