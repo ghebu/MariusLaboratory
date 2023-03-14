@@ -45,12 +45,12 @@ def get_department(git_url):
 
 def get_author(response):
     
-    '''
-    Trying to find out the userName in the first list and to return it, if false then cycle through the response actions.
-    '''
-    if 'causes' in response['action'][0]: 
-        author = response['actions'][0]['causes'][0]['userName']
-        return author
+    # '''
+    # Trying to find out the userName in the first list and to return it, if false then cycle through the response actions.
+    # '''
+    # if 'causes' in response['action'][0]: 
+    #     author = response['actions'][0]['causes'][0]['userName']
+    #     return author
     
     for action in response['actions']:
         if 'causes' in action:
@@ -89,7 +89,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
         author = get_author(response)
         duration = response['duration'] / 1000 #ms to seconds transformation
         result = response['result'] 
-
+        print(author)
 
         #app = git_url.split('/')[4] if git_url.find('https') else git_url.split('/')[5]
 
