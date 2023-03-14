@@ -26,7 +26,6 @@ jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(userna
 def get_jobs():
     # jobs = server.keys()
     jobs = [z for z in server.get_jobs_info()]
-    pprint(jobs)
     return jobs
 
 def get_department(git_url):
@@ -44,36 +43,15 @@ def get_department(git_url):
 
     return department
 
-def get_scm_info_from_latest_successful_build():
-    jobs = get_jobs()
+def get_scm_info_from_latest_successful_build(short_job_name):
+    build = server[short_job_name]
     
+    try:
+        git_url = build.get_last_build()._get_git_repo_url()  
+    except Exception as e: 
+        git_url = None 
 
-    print(jobs)
-    for job in jobs:
-        #print(f"JOB: {job}")
-        try: 
-            short_job_name = job[1]
-            build = server[short_job_name]
-            list_of_builds = [b for b in build.get_build_ids()]   ##The method doesn't work for some of the builds
-            
-            try:
-                git_url = build.get_last_build()._get_git_repo_url()  
-            except Exception as e: 
-                git_url = None
-            department = get_department(git_url)
-
-
-            job_url =job[0]
-
-            print(f"The job {short_job_name} has the builds {list_of_builds}. ")
-            print(f"requirements for get_build_info: {job_url}, {short_job_name}, {list_of_builds}, {git_url}, {department}")
-            pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url, department))
-            
-
-        
-        except Exception as e:
-            continue 
-
+    return git_url   
 
        
 
@@ -119,12 +97,39 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
         job_results[job_name + '_' + timestamp_human_readable] = payload
 
         
-    #pprint(response)
     return job_results
 
 
+
+def main(): 
+    jobs = get_jobs()
+    
+
+    print(jobs)
+    for job in jobs:
+        try: 
+            short_job_name = job[1]
+            build = server[short_job_name]
+            list_of_builds = [b for b in build.get_build_ids()]   ##The method doesn't work for some of the builds
+            job_url =job[0]
+
+            git_url = get_scm_info_from_latest_successful_build(short_job_name)
+            department = get_department(git_url)
+
+
+            
+
+            print(f"The job {short_job_name} has the builds {list_of_builds}. ")
+            print(f"requirements for get_build_info: {job_url}, {short_job_name}, {list_of_builds}, {git_url}, {department}")
+            pprint(get_build_info(job_url, short_job_name, list_of_builds, git_url, department))
+            
+
+        
+        except Exception as e:
+            continue 
+
 if __name__ == '__main__':
-    print(get_scm_info_from_latest_successful_build())
+    pprint(main())
 
     #pprint(get_build_info('http://localhost:8080/job/tests/job/warning', 'tests/warning', [10,9,8], 'none', ''))
 
