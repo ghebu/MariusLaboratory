@@ -43,6 +43,21 @@ def get_department(git_url):
 
     return department
 
+def get_author(response):
+    
+    '''
+    Trying to find out the userName in the first list and to return it, if false then cycle through the response actions.
+    '''
+    if 'causes' in response['action'][0]: 
+        author = response['actions'][0]['causes'][0]['userName']
+        return author
+    
+    for action in response['actions']:
+        if 'causes' in action:
+            author = action['causes'][0]['userName']  
+    
+    return author
+
 def get_scm_info_from_latest_successful_build(short_job_name):
     build = server[short_job_name]
     
@@ -71,9 +86,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
         timestamp = int(str(response['timestamp'])[:10])
         timestamp_human_readable = datetime.fromtimestamp(timestamp).isoformat()
         
-        for action in response['actions']:
-            if 'causes' in action:
-                author = action['causes'][0]['userName']  
+        author = get_author(response)
         duration = response['duration'] / 1000 #ms to seconds transformation
         result = response['result'] 
 
@@ -105,7 +118,7 @@ def main():
     jobs = get_jobs()
     
 
-    print(jobs)
+    pprint(jobs)
     for job in jobs:
         try: 
             short_job_name = job[1]
