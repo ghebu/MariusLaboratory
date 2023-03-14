@@ -120,4 +120,4 @@ if __name__ == '__main__':
 # TESTS
 #get_joburl_and_name = [z for z in server.get_jobs_info()]
     print('checking the job for tests/warning')
-    pprint(get_build_info('http://localhost:8080/job/tests/job/tests/warning', 'tests/warning', [10,9,8], 'none'))
+    pprint(get_build_info('http://localhost:8080/job/tests/job/warning', 'tests/warning', [10,9,8], 'none'))
