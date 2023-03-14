@@ -29,10 +29,22 @@ def get_jobs():
     pprint(jobs)
     return jobs
 
+def get_department(git_url):
     department = None
+
+    if 'bitbucket' in git_url: 
+        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
+    elif 'code.connected' in git_url: 
+        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','') 
+    elif 'github' in git_url: 
+        department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','')
+
+    return department
 
 def get_scm_info_from_latest_successful_build():
     jobs = get_jobs()
+    
+
     print(jobs)
     for job in jobs:
         #print(f"JOB: {job}")
@@ -45,13 +57,8 @@ def get_scm_info_from_latest_successful_build():
                 git_url = build.get_last_build()._get_git_repo_url()  
             except Exception as e: 
                 git_url = None
+            department = get_department(git_url)
 
-            if 'bitbucket' in git_url: 
-                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split('/')[5].replace('.git','')
-            elif 'code.connected' in git_url: 
-                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','') 
-            elif 'github' in git_url: 
-                department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','')
 
             job_url =job[0]
 
@@ -100,7 +107,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url, department):
             'git_url' : git_url,
             'timestamp': timestamp_human_readable,
             'build_duration': f"{duration} seconds",
-            'isFailed' : result, 
+            'result' : result, 
             'department' : department, 
             #'app_name' : app
         }
