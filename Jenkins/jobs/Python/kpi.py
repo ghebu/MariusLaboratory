@@ -83,9 +83,9 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         # elif 'github' in git_url: 
         #     department = git_url.split('/')[3].replace('.git','')  if 'http' in git_url else git_url.split(':')[1].split('/')[0].replace('.git','')
 
-        # app = git_url.split('/')[4] if git_url.find('https') else git_url.split('/')[5]
+        app = git_url.split('/')[4] if git_url.find('https') else git_url.split('/')[5]
 
-        # pprint(f"department and app: {department}, {app}")
+        pprint(f"department and app: {app}")
         payload = {
             'url' : job_url,
             'build' : build,
