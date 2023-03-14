@@ -106,7 +106,7 @@ def get_build_info(job_url, job_name, list_of_builds, git_url):
         job_results[job_name + '_' + timestamp_human_readable] = payload
 
         
-    pprint(response)
+    #pprint(response)
     return job_results
 
 
