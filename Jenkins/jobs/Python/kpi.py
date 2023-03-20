@@ -16,12 +16,12 @@ Get build duration
 username = 'ghebu'
 password = 'passw0rd'
 jenkins_url = 'http://localhost:8080'
-server = Jenkins(jenkins_url, username, password)
+server = Jenkins(jenkins_url, username, password, ssl_verify=False)   #https://stackoverflow.com/questions/41701396/python-jenkinsapi-ignore-certificate
 
 # build_obj = Build('http://localhost:8080/', 17, 'python-kpi')
 # pprint(f"BUILD INFO: {build_obj}")
 
-jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password)).json()
+jenkins_crumb = requests.get(f'{jenkins_url}/crumbIssuer/api/json', auth=(username, password), verify=False).json()
 
 def get_jobs():
     # jobs = server.keys()
@@ -44,13 +44,7 @@ def get_department(git_url):
     return department
 
 def get_author(response):
-    
-    # '''
-    # Trying to find out the userName in the first list and to return it, if false then cycle through the response actions.
-    # '''
-    # if 'causes' in response['action'][0]: 
-    #     author = response['actions'][0]['causes'][0]['userName']
-    #     return author
+
     try: 
         author = response['actions'][0]['causes'][0]['userName']
         return author
