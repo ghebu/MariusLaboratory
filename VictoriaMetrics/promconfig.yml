@@ -1,0 +1,31 @@
+global: 
+  scrape_interval: 15s
+  external_labels:
+      component: 'jaws'
+
+scrape_configs:
+- job_name: custom_headers
+  headers:
+  - "TenantID: abc"
+  - "My-Auth: TopSecret"
+
+- job_name: jenkins
+  scrape_interval: 30s
+  scrape_timeout: 15s
+  static_configs:
+  - targets: ["jenkins-jenkins-1:8080"]
+    labels: 
+      jenkins_label: "local-dev"
+  metrics_path: "/prometheus"
+  # basic_auth: 
+  #   username: ghebu
+  #   password: passw0rd
+
+
+# - job_name: jenkins
+#   static_configs:
+#   - targets: ["jenkins-jenkins-1:8080"]
+#   metrics_path: "/metrics/currentUser/metrics"
+#   basic_auth:
+#     username: "ghebu"
+#     password: "passw0rd"

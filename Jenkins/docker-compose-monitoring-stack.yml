@@ -1,0 +1,64 @@
+version: "3"
+services:
+  jenkins: 
+    environment: 
+      ADMIN_USERNAME: "ghebu"
+      ADMIN_PASSWORD: "passw0rd"
+    build: 
+      context: JenkinsDockerfile
+      dockerfile: Jenkins.Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - jenkins_home:/var/jenkins_home:Z
+    ports:
+      - 8080:8080
+      - 50000:50000
+    privileged: true 
+
+  jenkins_agent: 
+    environment: 
+      JENKINS_AGENT_NAME: "docker-agent"
+      JENKINS_URL: "http://jenkins:8080"
+      TERRAFORM_VERSION: "0.13.1"
+    build:
+      context: JenkinsDockerfile
+      dockerfile: JenkinsAgent.Dockerfile
+      args:
+        - TOKEN=44fb500a8cdabb17e48d4bb2463bec5901e71c82c8b54c01364a430c2e4dd4d4
+    healthcheck:
+        test: ["CMD", "curl", "-f", "-u", "ghebu:passw0rd", "http://jenkins:8080"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        #start_period: 5s
+    volumes:
+      - jenkins_agent:/home/jenkins/agent:Z
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 22
+      - 50000
+    privileged: true
+
+  victoriametrics: 
+    build: 
+      context: ../VictoriaMetrics
+      dockerfile: Dockerfile
+    volumes:
+      - victoria_metrics:/victoria-metrics-data
+    ports:
+      - 8428:8428
+    #privileged: true
+  
+  grafana: 
+    image: grafana/grafana
+    volumes:
+      - grafana:/var/lib/grafana
+    ports:
+      - 3000:3000
+
+volumes: 
+  jenkins_home:
+  jenkins_agent:
+  victoria_metrics:
+  grafana:
+
