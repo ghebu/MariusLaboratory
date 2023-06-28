@@ -16,7 +16,7 @@ scrape_configs:
   - targets: ["jenkins-jenkins-1:8080"]
     labels: 
       jenkins_label: "local-dev"
-  metrics_path: "/prometheus"
+  metrics_path: "/prometheus/"
   # basic_auth: 
   #   username: ghebu
   #   password: passw0rd
