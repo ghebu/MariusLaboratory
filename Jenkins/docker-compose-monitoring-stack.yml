@@ -38,6 +38,8 @@ services:
       - 22
       - 50000
     privileged: true
+    depends_on: 
+      - jenkins
 
   victoriametrics: 
     build: 

@@ -24,9 +24,9 @@ USER 1000
 WORKDIR /home/jenkins/agent
 RUN tfswitch $TERRAFORM_VERSION
 
-
-#RUN export TOKEN="$(curl -L -s -u ghebu:passw0rd  -X GET http://jenkins:8080/computer/docker-agent/slave-agent.jnlp | sed 's/.*<application-desc main-class=\"hudson.remoting.jnlp.Main\"><argument>\([a-z0-9]*\).*/\1/' | grep -E -o '<argument>.*</argument>'  | cut -d '>' -f2 | cut -d '<' -f1)"
 ARG TOKEN
+RUN export TOKEN="$(curl -L -s -u ghebu:passw0rd  -X GET http://jenkins:8080/computer/docker-agent/slave-agent.jnlp | sed 's/.*<application-desc main-class=\"hudson.remoting.jnlp.Main\"><argument>\([a-z0-9]*\).*/\1/' | grep -E -o '<argument>.*</argument>'  | cut -d '>' -f2 | cut -d '<' -f1)"
+
 
 ENV JENKINS_SECRET=${TOKEN}   
 ENV JENKINS_URL="http://jenkins:8080"
